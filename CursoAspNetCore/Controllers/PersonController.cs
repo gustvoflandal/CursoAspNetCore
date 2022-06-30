@@ -26,8 +26,6 @@ namespace CursoAspNetCore.Controllers
                 var sum = ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber);
                 return Ok(sum.ToString());
             }
-
-
             return BadRequest("Invalid Input");
         }
 
@@ -38,7 +36,6 @@ namespace CursoAspNetCore.Controllers
             {
                 return decimalValue;
             }
-
             return 0;
         }
 
