@@ -1,6 +1,6 @@
 ﻿using CursoAspNetCore.Model;
 
-namespace CursoAspNetCore.Services;
+namespace CursoAspNetCore.Services.Interfaces;
 
 public interface IPersonService
 {

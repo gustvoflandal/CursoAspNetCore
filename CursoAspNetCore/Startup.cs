@@ -1,4 +1,7 @@
-﻿namespace CursoAspNetCore
+﻿using CursoAspNetCore.Services;
+using CursoAspNetCore.Services.Interfaces;
+
+namespace CursoAspNetCore
 {
     public class Startup
     {
@@ -12,6 +15,10 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            //Injeção de dependencia 
+            services.AddScoped<IPersonService, PersonService>();
+
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
         }

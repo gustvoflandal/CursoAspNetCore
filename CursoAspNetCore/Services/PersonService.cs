@@ -1,10 +1,11 @@
 ﻿using CursoAspNetCore.Model;
+using CursoAspNetCore.Services.Interfaces;
 
-namespace CursoAspNetCore.Services.Implementations
+namespace CursoAspNetCore.Services
 {
     public class PersonService : IPersonService
     {
-        
+        private volatile int count;
 
         Person IPersonService.Create(Person person)
         {
@@ -13,7 +14,7 @@ namespace CursoAspNetCore.Services.Implementations
 
         void IPersonService.Delete(long id)
         {
-            
+
         }
 
         List<Person> IPersonService.FindAll()
@@ -22,17 +23,18 @@ namespace CursoAspNetCore.Services.Implementations
 
             for (int i = 0; i < 8; i++)
             {
-                Person person = null;
+                Person person = MockPerson(i);
                 persons.Add(person);
             }
             return persons;
         }
 
+ 
         Person IPersonService.FindByID(long id)
         {
             return new Person
             {
-                Id = 1,
+                Id = IncrementGet(),
                 FirstName = "Gustavo",
                 LastName = "Landal",
                 Address = "Campos Sales",
@@ -42,7 +44,24 @@ namespace CursoAspNetCore.Services.Implementations
 
         Person IPersonService.Update(Person person)
         {
-            throw new NotImplementedException();
+            return person;
+        }
+
+        private Person MockPerson(int i)
+        {
+            return new Person
+            {
+                Id = IncrementGet(),
+                FirstName = "Person Name " + i,
+                LastName = "Person LastName " + i,
+                Address = "Person Address " + i,
+                Gender = "Person Gender " + i
+            };
+        }
+
+        private long IncrementGet()
+        {
+            return Interlocked.Increment(ref count);
         }
     }
 }
